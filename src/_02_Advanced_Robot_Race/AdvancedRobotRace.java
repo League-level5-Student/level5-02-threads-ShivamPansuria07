@@ -37,7 +37,7 @@ public class AdvancedRobotRace implements Runnable {
 			robots[i].setSpeed(150);
 
 		}
-//s
+//i vd
 		boolean raceInProgress = true;
 		boolean firstRobot = false;
 		int WinningRobot = -1;
