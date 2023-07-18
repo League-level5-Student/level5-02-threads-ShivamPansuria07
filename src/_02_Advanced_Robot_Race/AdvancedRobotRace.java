@@ -11,63 +11,87 @@ import _01_Olympic_Rings.OlympicRings_Threaded;
 public class AdvancedRobotRace implements Runnable {
 	// Re-do the robot race recipe from level 3 module 0.
 	// This time, use threads to make all of the robots go at the same time.
+	Robot robots = new Robot();
+	static boolean bol1 = false;
+	static boolean bol2 = false;
+	static boolean bol3 = false;
+	static Thread r1;
+	static Thread r2;
+	static Thread r3;
+	static Thread r4;
+	static Thread r5;
+	static String robotWinner;
+	static boolean raceInProgress = true;
 	public static void main(String[] args) {
-		Thread r1 = new Thread(new AdvancedRobotRace());
-    	r1.start();
+		
+		 r1 = new Thread(new AdvancedRobotRace());
+    	
  //   	bol1 = true;
-    	Thread r2 = new Thread(new AdvancedRobotRace());
-    	r2.start();
+    	 r2 = new Thread(new AdvancedRobotRace());
+    	
  //    	bol2 = true;
-    	Thread r3 = new Thread(new AdvancedRobotRace());
-    	r3.start();
+    	 r3 = new Thread(new AdvancedRobotRace());
+    
  // 	bol3 = true;
-    	Thread r4 = new Thread(new AdvancedRobotRace());
-    	r4.start();
+    	 r4 = new Thread(new AdvancedRobotRace());
+    	
  // 	bol4 = true;
-    	Thread r5 = new Thread(new AdvancedRobotRace());
-    	r5.start();
+    	 r5 = new Thread(new AdvancedRobotRace());
+    	
  // 	bol5 = true;
-		Robot[] robots = new Robot[5];
-
-		for (int i = 0; i < robots.length; i++) {
-
-			robots[i] = new Robot();
-			robots[i].setY(540);
-			robots[i].setX(100 + (i * 100));
-			robots[i].setSpeed(150);
-
-		}
-//ifdgdg
-		boolean raceInProgress = true;
-		boolean firstRobot = false;
-		int WinningRobot = -1;
-		while (raceInProgress) {
-			for (int i = 0; i < robots.length; i++) {
-				if (robots[i].getY() < 0) {
-					raceInProgress = false;
-					WinningRobot = i;
-					JOptionPane.showMessageDialog(null, "The winning robot is robot number " + WinningRobot + "!");
-					robots[WinningRobot].setSpeed(100);
-					robots[WinningRobot].turn(180);
-					robots[WinningRobot].move(25);
-					robots[WinningRobot].turn(180);
-					break;
-
-				}
-
-				Random rand = new Random();
-				int p = rand.nextInt(50);
-				robots[i].move(p);
-				robots[i].setSpeed(150);
-
-			}
-		}
-
+//l		
+    	r1.start();
+    	r2.start();
+    	r3.start();
+    	r4.start();
+    	r5.start();
+    	
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		Random rand = new Random();
+		int dist = rand.nextInt(150)+50;
+	
+		
+			robots.setY(540);
+			robots.setX((dist)+50);
+			robots.setSpeed(150);
+
+		
+
+		
+		boolean firstRobot = false;
+		int WinningRobot = -1;
+		while (raceInProgress) {
+				if (robots.getY() <= 0) {
+					
+
+					
+		if(!r1.isAlive()) {
+			JOptionPane.showMessageDialog(null, "robot 1 wins!");
+		}else if(!r2.isAlive()){
+			JOptionPane.showMessageDialog(null, "robot 2 wins!");
+		}else if(!r3.isAlive()){
+			JOptionPane.showMessageDialog(null, "robot 3 wins!");
+		}else if(!r4.isAlive()){
+			JOptionPane.showMessageDialog(null, "robot 4 wins!");
+		}else if(!r5.isAlive()){
+			JOptionPane.showMessageDialog(null, "robot 5 wins!");
+		}
+				
+		raceInProgress = false;
+					break;
+
+				}
+
+			
+				int p = rand.nextInt(50);
+				robots.move(p);
+				robots.setSpeed(150);
+
+			
+		}
 		
 	}
 }

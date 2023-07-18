@@ -8,6 +8,7 @@ public class OlympicRings_Threaded implements Runnable{
 	static boolean bol1 = false;
 	static boolean bol2 = false;
 	static boolean bol3 = false;
+	Robot timmy = new Robot();
 	// Make A Program that uses Threads and robots to draw the Olympic rings. One robot should draw one ring simultaneously with the other 4 robots.
 	public static void main(String[] args) {
 	
@@ -15,15 +16,19 @@ public class OlympicRings_Threaded implements Runnable{
 		
 	   
 	    	Thread r1 = new Thread(new OlympicRings_Threaded());
-	    	r1.start();
+	    	
 	    	bol1 = true;
 	    	Thread r2 = new Thread(new OlympicRings_Threaded());
-	    	r2.start();
+	    	
 	    	bol2 = true;
 	    	Thread r3 = new Thread(new OlympicRings_Threaded());
-	    	r3.start();
+	    	
 	    	bol3 = true;
 	    	
+	    	
+	    	r1.start();
+	    	r2.start();
+	    	r3.start();
 		}
 		
 		
@@ -34,7 +39,7 @@ public class OlympicRings_Threaded implements Runnable{
 
 	@Override
 	public void run() {
-		Robot timmy = new Robot();
+		
 	if(bol1) {
 		 timmy.moveTo(400, 700);
 		 bol1 = false;
